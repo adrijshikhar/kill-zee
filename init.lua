@@ -1,5 +1,6 @@
 require "gameObject"
 require "config"
+
 function init()
     initPlayer()
     initTower()
@@ -19,7 +20,7 @@ function initEnemies()
     -- The enemies array
     enemies = {}
     for i = 1, ENEMY_COUNT do
-        enemies[i] = getGameObject(0, 0, 0, 0, 10, 100)
+        enemies[i] = getGameObject(0, 0, 0, 0, 50, 100)
         initEnemy(enemies[i])
     end
 end

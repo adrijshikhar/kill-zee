@@ -10,3 +10,9 @@ end
 function distance(x1, y1, x2, y2)
     return math.sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
 end
+
+function drawImage(object, image)
+    local factor = object.size / zombie:getWidth()
+    love.graphics.draw(zombie, object.x, object.y, 0 , factor, factor)
+end
+
