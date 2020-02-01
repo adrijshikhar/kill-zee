@@ -6,25 +6,8 @@ function init()
     WINDOW_HEIGHT = love.graphics.getHeight()
 
     ENEMY_COUNT = 100
-
-    player 	= getGameObject(
-        WINDOW_WIDTH / 2,
-        WINDOW_HEIGHT / 2 + 200,
-        0,
-        0,
-        10,
-        100
-    )
-
-    tower = getGameObject(
-        WINDOW_WIDTH / 2,
-        WINDOW_HEIGHT / 2,
-        0,
-        0,
-        100,
-        100
-    )
-
+initPlayer()
+initTower()
     -- The enemies array
     enemies = {}
     for i=1, ENEMY_COUNT do
@@ -42,4 +25,26 @@ function init()
     
     
     
+end
+
+function initPlayer()
+    player 	= getGameObject(
+        WINDOW_WIDTH / 2,
+        WINDOW_HEIGHT / 2 + 200,
+        0,
+        0,
+        10,
+        100
+    )
+end
+
+function initTower()  
+    tower = getGameObject(
+        WINDOW_WIDTH / 2,
+        WINDOW_HEIGHT / 2,
+        0,
+        0,
+        100,
+        100
+    )
 end
