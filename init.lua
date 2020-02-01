@@ -6,25 +6,14 @@ function init()
     WINDOW_HEIGHT = love.graphics.getHeight()
 
     ENEMY_COUNT = 100
-initPlayer()
-initTower()
-    -- The enemies array
-    enemies = {}
-    for i=1, ENEMY_COUNT do
-        x = math.random(0, WINDOW_WIDTH * 1)
-        y = math.random(0, WINDOW_HEIGHT * 1)
-        enemies[i] =  getGameObject(
-            x,
-            y,
-            tower.x - x,
-            tower.y - y,
-            10,
-            100
-        )
-    end
-    
-    
-    
+    ENEMY_MAX_VELOCITY = 50
+
+    WORLD_SIZE_FACTOR = 0.5
+
+    initPlayer()
+    initTower()
+    initEnemies()
+
 end
 
 function initPlayer()
@@ -47,4 +36,25 @@ function initTower()
         100,
         100
     )
+end
+
+function initEnemies()
+    -- The enemies array
+    enemies = {}
+    for i=1, ENEMY_COUNT do
+        x = math.random(- WORLD_SIZE_FACTOR * WINDOW_WIDTH/2 , WORLD_SIZE_FACTOR * WINDOW_WIDTH/2) + tower.x
+        y = math.random(- WORLD_SIZE_FACTOR * WINDOW_HEIGHT/2, WORLD_SIZE_FACTOR * WINDOW_HEIGHT/2) + tower.y
+        length = distance(tower.x, tower.y, x, y)
+        vx = ENEMY_MAX_VELOCITY * (tower.x - x) / length;
+        vy = ENEMY_MAX_VELOCITY * (tower.y - y) / length;
+        
+        enemies[i] =  getGameObject(
+            x,
+            y,
+            vx,
+            vy,
+            10,
+            100
+        )
+    end
 end
