@@ -13,6 +13,10 @@ function updateObjects(dt)
     end
 end
 
+function removeEnemy(object)
+    initEnemy(object)
+end
+
 function love.mousepressed(x, y, button)
     if button == 1 then
         local length = distance(player.x, player.y, x, y)

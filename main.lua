@@ -4,7 +4,7 @@ require "draw"
 require "updateObjects"
 
 function love.load()
-  init()
+	init()
 end
 
 function love.update(dt)
@@ -14,5 +14,3 @@ end
 function love.draw()
 	drawObjects()
 end
-
-

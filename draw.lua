@@ -1,6 +1,4 @@
 function drawObjects()
-    
-    
     love.graphics.setColor(0, 1, 0)
     for i = 1, ENEMY_COUNT do
         drawCircle(enemies[i])

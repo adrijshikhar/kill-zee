@@ -1,1 +1,8 @@
+WINDOW_WIDTH = love.graphics.getWidth()
+WINDOW_HEIGHT = love.graphics.getHeight()
+
+ENEMY_COUNT = 100
+ENEMY_MAX_VELOCITY = 50
+
+WORLD_SIZE_FACTOR = 10
 PLAYER_MAX_VELOCITY = 200
