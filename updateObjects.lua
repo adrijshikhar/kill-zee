@@ -11,6 +11,9 @@ function updateObjects(dt)
             enemies[i].vy = 0
         end
     end
+
+    -- bounding player to screen
+    boundPlayerToScreen(player)
 end
 
 function removeEnemy(object)
@@ -22,5 +25,21 @@ function love.mousepressed(x, y, button)
         local length = distance(player.x, player.y, x, y)
         player.vx = PLAYER_MAX_VELOCITY * (x - player.x) / length
         player.vy = PLAYER_MAX_VELOCITY * (y - player.y) / length
+    end
+end
+
+
+function boundPlayerToScreen(player)
+    if (player.x < player.size) then
+    player.x = player.size
+    end
+    if (player.y < player.size) then
+    player.y = player.size
+    end
+    if (player.x > WINDOW_WIDTH-player.size) then
+    player.x = WINDOW_WIDTH-player.size
+    end
+    if (player.y > WINDOW_HEIGHT-player.size) then
+    player.y =WINDOW_HEIGHT-player.size
     end
 end
