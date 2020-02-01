@@ -1,3 +1,4 @@
+
 function drawObjects()
 
     drawImage(tower, towerSprite)

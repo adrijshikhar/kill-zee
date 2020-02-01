@@ -5,6 +5,7 @@ function init()
     initPlayer()
     initTower()
     initEnemies()
+    view_arc_angle = 0
 end
 
 function initPlayer()
