@@ -8,7 +8,7 @@ function init()
     ENEMY_COUNT = 100
     ENEMY_MAX_VELOCITY = 50
 
-    WORLD_SIZE_FACTOR = 0.5
+    WORLD_SIZE_FACTOR = 10
 
     initPlayer()
     initTower()
@@ -25,6 +25,8 @@ function initPlayer()
         10,
         100
     )
+    player.vx, player.vy = 0,0
+
 end
 
 function initTower()  
