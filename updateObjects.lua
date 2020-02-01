@@ -2,6 +2,7 @@ require "utility"
 require "config"
 
 function updateObjects(dt)
+    view_arc_angle = view_arc_angle + WEAPON_SWING_SPEED*dt
     updateObject(player, dt)
     updateObject(tower, dt)
     for i = 1, ENEMY_COUNT do
@@ -9,6 +10,9 @@ function updateObjects(dt)
         if (distance(enemies[i].x, enemies[i].y, tower.x, tower.y) < tower.size + enemies[i].size) then
             enemies[i].vx = 0
             enemies[i].vy = 0
+        end
+        if(distance(enemies[i].x, enemies[i].y, player.x, player.y) < WEAPON_SIZE_FACTOR *player.size) then
+            removeEnemy(enemies[i]);
         end
     end
 
