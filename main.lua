@@ -3,6 +3,7 @@ require "init"
 require "draw"
 require "updateObjects"
 
+
 function love.load()
 	loadGraphics()
 	init()
@@ -13,7 +14,7 @@ function love.update(dt)
 		updateObjects(dt)
 	end
 end
-
+	
 function love.draw()
 	if gameOver == 0 then
 		drawObjects()
@@ -35,12 +36,20 @@ function love.draw()
 end
 
 function loadGraphics()
+
 	zombieSprites = {}
 	zombieSprites[0] = love.graphics.newImage("res/zombie0.png")
 	zombieSprites[1] = love.graphics.newImage("res/zombie1.png")
 	bloodSplash = love.graphics.newImage("res/blood-splash.png")
 	bloodSplashSound = love.sound.newSoundData("sounds/bloodSplash.mp3")
 	backgroundMusic = love.sound.newSoundData("sounds/killZBackground.mp3")
+	bloodSplash = love.graphics.newImage("res/blood-splash.png")	
+
+	-- rgba(53, 36, 61, 0)
+	r = 53/255
+	g = 36/255
+	b = 61/255
+	love.graphics.setBackgroundColor(r,g,b,0.2)
 	towerSprite = love.graphics.newImage("res/tower.png")
 
 	playerSprites = {}
