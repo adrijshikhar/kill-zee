@@ -3,6 +3,7 @@ require "init"
 require "draw"
 require "updateObjects"
 
+
 function love.load()
 	loadGraphics()
 	init()
@@ -11,7 +12,7 @@ end
 function love.update(dt)
 	updateObjects(dt)
 end
-
+	
 function love.draw()
 	drawObjects()
 	
@@ -19,10 +20,15 @@ end
 
 
 function loadGraphics()
+
 	zombieSprites = {}
 	zombieSprites[0] = love.graphics.newImage("res/zombie0.png")
 	zombieSprites[1] = love.graphics.newImage("res/zombie1.png")
-	
+	-- rgba(53, 36, 61, 0)
+	r = 53/255
+	g = 36/255
+	b = 61/255
+	love.graphics.setBackgroundColor(r,g,b,0.2)
 	towerSprite = love.graphics.newImage("res/tower.png")
 
 	playerSprites = {}
