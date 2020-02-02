@@ -6,6 +6,7 @@ function init()
     initTower()
     initEnemies()
     view_arc_angle = 0
+    score  = 0
 end
 
 function initPlayer()
@@ -15,6 +16,9 @@ end
 
 function initTower()
     tower = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 50, 100)
+    towerMeter = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 15, 100)
+    towerMeter.currentFrame = 0;
+    towerMeter.currentMeter = 0;
 end
 
 function initEnemies()
