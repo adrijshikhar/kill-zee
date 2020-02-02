@@ -9,6 +9,7 @@ function init()
     initEnemies()
     view_arc_angle = 0
     score  = 0
+    gameOver = 0
 end
 
 function initPlayer()

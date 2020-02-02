@@ -32,9 +32,12 @@ function updateObjects(dt)
         player.y = y * (tower.size + player.size) + tower.y
         tower.health = tower.health + TOWER_REPAIR_SPEED * dt;
     end
+    
+    if(tower.health <= 0) then 
+        gameOver = 1
+    end
     if(tower.health < 0) then 
         tower.health = 0
-        love.graphics.print("Game Over", 100, 200)
     end
     if(tower.health > 100) then 
         tower.health = 100
