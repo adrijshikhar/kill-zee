@@ -6,5 +6,6 @@ function getGameObject(x, y, vx, vy, size, health)
     obj.vx = vx
     obj.vy = vy
     obj.health = health
+    obj.Yangle = 0
     return obj
 end

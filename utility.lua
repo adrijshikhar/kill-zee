@@ -12,7 +12,16 @@ function distance(x1, y1, x2, y2)
 end
 
 function drawImage(object, image)
-    local factor = object.size / zombie:getWidth()
-    love.graphics.draw(zombie, object.x, object.y, 0 , factor, factor)
+    local upVec = -1
+    local rightVec = 1
+    if not (object.vx == 0 and object.vy == 0) then
+        object.Yangle = math.acos(upVec * object.vy / math.sqrt(object.vy^2 + object.vx^2))
+        if object.vx < 0 then 
+            object.Yangle = 2 * math.pi - object.Yangle
+        end
+    end
+    local factorX =  2 * object.size / image:getWidth() 
+    local factorY =  2 * object.size / image:getHeight()
+    love.graphics.draw(image, (object.x - object.size ), (object.y - object.size), object.Yangle , 1.4 * factorX, 1.4 * factorY, object.size, object.size)
 end
 

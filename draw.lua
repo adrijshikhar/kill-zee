@@ -1,13 +1,11 @@
 function drawObjects()
-    for i = 1, ENEMY_COUNT do
-        drawImage(enemies[i],zombie)
-       
+
+    drawImage(tower, towerSprite)
+    for i = 1, ENEMY_COUNT do 
+        drawImage(enemies[i],zombieSprites[0])    
     end
+    drawImage(player,playerSprites[0])
     
-    love.graphics.setColor(0, 0, 1)
-    drawCircle(tower)
-    love.graphics.setColor(1, 0, 0)
-    drawCircle(player)
 end
 
 

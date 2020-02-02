@@ -13,7 +13,7 @@ function initPlayer()
 end
 
 function initTower()
-    tower = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 100, 100)
+    tower = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 50, 100)
 end
 
 function initEnemies()
