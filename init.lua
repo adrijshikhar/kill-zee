@@ -13,14 +13,14 @@ function initPlayer()
 end
 
 function initTower()
-    tower = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 100, 100)
+    tower = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 50, 100)
 end
 
 function initEnemies()
     -- The enemies array
     enemies = {}
     for i = 1, ENEMY_COUNT do
-        enemies[i] = getGameObject(0, 0, 0, 0, 50, 100)
+        enemies[i] = getGameObject(0, 0, 0, 0, 10, 100)
         initEnemy(enemies[i])
     end
 end
