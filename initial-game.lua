@@ -10,12 +10,6 @@ function loadInitialGame()
     killzeeTitle = love.graphics.newImage("res/Kill-Zee.png")
     love.graphics.draw(killzeeTitle, 50, 100, 0, 400 / killzeeTitle:getWidth(), 150 / killzeeTitle:getHeight())
 
-    -- highScoreBox = love.graphics.newImage("res/High-score.png")
-    -- love.graphics.draw(highScoreBox, 600, 100, 0, 90 / highScoreBox:getWidth(), 50 / highScoreBox:getHeight())
-
-    -- highScore = love.graphics.newImage("res/highscore.png")
-    -- love.graphics.draw(highScore, 50, 400, 0, 90 / highScore:getWidth(), 50 / highScore:getHeight())
-
     playnowbg = love.graphics.newImage("res/rect3.png")
     love.graphics.draw(playnowbg, 50, 400, 0, 400 / playnowbg:getWidth(), 100 / playnowbg:getHeight())
 

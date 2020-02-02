@@ -56,7 +56,7 @@ function updateObjects(dt)
 end
 
 function removeEnemy(enemy, bloodSplash, index)
-    if index <= ENEMY_COUNT then
+    if index < BLOOD_SPLASH_COUNT then
         bloodSplashIndex = bloodSplashIndex + 1
     else
         bloodSplashIndex = 1
