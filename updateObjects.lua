@@ -1,11 +1,10 @@
 require "utility"
 require "config"
 
+bloodSplashIndex = 1
 function updateObjects(dt)
     updateTower(dt)
     view_arc_angle = view_arc_angle + WEAPON_SWING_SPEED * dt
-
-    bloodSplashIndex = 1
 
     updateObject(tower, dt)
     -- zombie tower collision
@@ -17,13 +16,8 @@ function updateObjects(dt)
             tower.health = tower.health - TOWER_DAMAGE_SPEED * dt
         end
         if (distance(enemies[i].x, enemies[i].y, player.x, player.y) < WEAPON_SIZE_FACTOR * player.size) then
-            removeEnemy(enemies[i], bloodSplashes[bloodSplashIndex])
-            if bloodSplashIndex <= ENEMY_COUNT then
-                -- body
-                bloodSplashIndex = bloodSplashIndex + 1
-            else
-                bloodSplashIndex = 1
-            end
+            removeEnemy(enemies[i], bloodSplashes[bloodSplashIndex], bloodSplashIndex)
+
             score = score + 1
             TOWER_DAMAGE_SPEED = TOWER_DAMAGE_SPEED + DAMAGE_INCREASE_RATE
         end
@@ -61,7 +55,12 @@ function updateObjects(dt)
     boundPlayerToScreen(player)
 end
 
-function removeEnemy(enemy, bloodSplash)
+function removeEnemy(enemy, bloodSplash, index)
+    if index <= ENEMY_COUNT then
+        bloodSplashIndex = bloodSplashIndex + 1
+    else
+        bloodSplashIndex = 1
+    end
     playSound(bloodSplashSound)
     initBloodSplash(bloodSplash, enemy.x, enemy.y)
     initEnemy(enemy)
