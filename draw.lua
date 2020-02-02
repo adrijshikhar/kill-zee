@@ -1,7 +1,7 @@
 
 function drawObjects()
 
-    for i = 1, ENEMY_COUNT do 
+    for i = 1, BLOOD_SPLASH_COUNT do 
         drawImage(bloodSplashes[i],bloodSplash)    
     end
     for i = 1, ENEMY_COUNT do 
