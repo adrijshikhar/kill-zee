@@ -22,6 +22,6 @@ function drawImage(object, image)
     end
     local factorX =  2 * object.size / image:getWidth() 
     local factorY =  2 * object.size / image:getHeight()
-    love.graphics.draw(image, (object.x - object.size ), (object.y - object.size), object.Yangle , 1.4 * factorX, 1.4 * factorY, object.size, object.size)
+    love.graphics.draw(image, (object.x), (object.y), object.Yangle , factorX, factorY, image:getWidth() / 2, image:getHeight() / 2)
 end
 
