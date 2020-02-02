@@ -2,11 +2,14 @@ require "utility"
 require "init"
 require "draw"
 require "updateObjects"
+require "initial-game"
+
 
 
 function love.load()
-	loadGraphics()
-	init()
+	loadInitialGame()
+	--loadGraphics()
+	--init()
 end
 
 function love.update(dt)
