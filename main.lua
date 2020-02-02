@@ -8,8 +8,8 @@ require "initial-game"
 
 function love.load()
 	loadInitialGame()
-	--loadGraphics()
-	--init()
+	loadGraphics()
+	init()
 end
 
 function love.update(dt)
