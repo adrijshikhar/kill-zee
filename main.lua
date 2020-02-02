@@ -50,6 +50,8 @@ function loadGraphics()
 	g = 36/255
 	b = 61/255
 	love.graphics.setBackgroundColor(r,g,b,0.2)
+	bloodSplash = love.graphics.newImage("res/blood-splash.png")	
+
 	towerSprite = love.graphics.newImage("res/tower.png")
 
 	playerSprites = {}
