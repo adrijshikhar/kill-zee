@@ -62,6 +62,7 @@ function updateObjects(dt)
 end
 
 function removeEnemy(enemy, bloodSplash)
+    playSound(bloodSplashSound)
     initBloodSplash(bloodSplash, enemy.x, enemy.y)
     initEnemy(enemy)
 end
