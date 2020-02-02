@@ -46,11 +46,11 @@ function updateObjects(dt)
         player.y = y * (tower.size + player.size) + tower.y
         tower.health = tower.health + TOWER_REPAIR_SPEED * dt
     end
-    
-    if(tower.health <= 0) then 
+
+    if (tower.health <= 0) then
         gameOver = 1
     end
-    if(tower.health < 0) then 
+    if (tower.health < 0) then
         tower.health = 0
     end
     if (tower.health > 100) then
@@ -68,11 +68,20 @@ function removeEnemy(enemy, bloodSplash)
 end
 
 function love.mousepressed(x, y, button)
-    if button == 1 then
+    if gameOver == -1 then
+        if
+            button == 1 and x >= playbutton.x and x < playbutton.x + playnowbg:getWidth() and y >= playbutton.y and
+                y < playbutton.y + playnowbg:getHeight()
+         then
+            gameOver = 0
+            loadGraphics()
+            init()
+        end
+    elseif (button == 1 and gameOver == 0) then
         local length = distance(player.x, player.y, x, y)
         player.vx = PLAYER_MAX_VELOCITY * (x - player.x) / length
         player.vy = PLAYER_MAX_VELOCITY * (y - player.y) / length
-        player.destX, player.destY = x,y
+        player.destX, player.destY = x, y
     end
 end
 

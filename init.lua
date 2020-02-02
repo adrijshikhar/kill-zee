@@ -10,7 +10,6 @@ function init()
     initTower()
     initEnemies()
     initBloodSplashes()
-    playBackgroundMusic(backgroundMusic)
     view_arc_angle = 0
     score  = 0
     gameOver = 0
@@ -58,4 +57,50 @@ function initBloodSplash(bloodSplash, x, y)
     bloodSplash.y = y
     bloodSplash.vx, bloodSplash.vy = 0, 0
     bloodSplash.timeOut = BLOOD_SPLASH_TIMEOUT
+end
+
+
+function loadGraphics()
+
+	zombieSprites = {}
+	zombieSprites[0] = love.graphics.newImage("res/zombie0.png")
+	zombieSprites[1] = love.graphics.newImage("res/zombie1.png")
+	bloodSplash = love.graphics.newImage("res/blood-splash.png")
+	bloodSplashSound = love.sound.newSoundData("sounds/bloodSplash.mp3")
+	bloodSplash = love.graphics.newImage("res/blood-splash.png")	
+
+	-- rgba(53, 36, 61, 0)
+	r = 53/255
+	g = 36/255
+	b = 61/255
+	love.graphics.setBackgroundColor(r,g,b,0.2)
+	bloodSplash = love.graphics.newImage("res/blood-splash.png")	
+
+	towerSprite = love.graphics.newImage("res/tower.png")
+
+	playerSprites = {}
+	playerSprites[0] = love.graphics.newImage("res/player0.png")
+
+	towerMeters = {}
+	towerMeters[0] = {}
+	towerMeters[1] = {}
+	towerMeters[2] = {}
+
+	towerMeters[0][0] = love.graphics.newImage("res/greenball0.png")
+	towerMeters[0][1] = love.graphics.newImage("res/greenball1.png")
+	towerMeters[0][2] = love.graphics.newImage("res/greenball2.png")
+	towerMeters[0][3] = love.graphics.newImage("res/greenball3.png")
+	towerMeters[0][4] = love.graphics.newImage("res/greenball4.png")
+
+	towerMeters[1][0] = love.graphics.newImage("res/blueball0.png")
+	towerMeters[1][1] = love.graphics.newImage("res/blueball1.png")
+	towerMeters[1][2] = love.graphics.newImage("res/blueball2.png")
+	towerMeters[1][3] = love.graphics.newImage("res/blueball3.png")
+	towerMeters[1][4] = love.graphics.newImage("res/blueball4.png")
+
+	towerMeters[2][0] = love.graphics.newImage("res/redball0.png")
+	towerMeters[2][1] = love.graphics.newImage("res/redball1.png")
+	towerMeters[2][2] = love.graphics.newImage("res/redball2.png")
+	towerMeters[2][3] = love.graphics.newImage("res/redball3.png")
+	towerMeters[2][4] = love.graphics.newImage("res/redball4.png")
 end
