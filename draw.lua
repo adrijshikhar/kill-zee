@@ -1,13 +1,13 @@
 
 function drawObjects()
 
-    drawImage(tower, towerSprite)
     for i = 1, ENEMY_COUNT do 
         drawImage(bloodSplashes[i],bloodSplash)    
     end
     for i = 1, ENEMY_COUNT do 
         drawImage(enemies[i],zombieSprites[0])    
     end 
+    drawImage(tower, towerSprite)
     drawImage(player,playerSprites[0])
     local frame = math.floor(towerMeter.currentFrame)
     local meter = towerMeter.currentMeter
