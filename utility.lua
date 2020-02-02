@@ -3,12 +3,11 @@ function drawCircle(circle)
 end
 
 function updateObject(object, dt)
-    if (object=="player") 
-    then
+    if (object == "player") then
         local length = distance(object.x, object.y, object.DestX, object.destY)
-        while(length > 0) do
-        object.x = object.x + object.vx * dt
-        object.y = object.y + object.vy * dt
+        while (length > 0) do
+            object.x = object.x + object.vx * dt
+            object.y = object.y + object.vy * dt
         end
     else
         object.x = object.x + object.vx * dt
@@ -43,12 +42,26 @@ function drawImage(object, image)
     )
 end
 
+function drawPlayerAxe(object, image)
+    local factorX = 2 * object.size / image:getWidth()
+    local factorY = 3.10639309197 * object.size / image:getHeight()
+    love.graphics.draw(
+        image,
+        (object.x),
+        (object.y),
+        object.Yangle,
+        factorX,
+        factorY,
+        image:getWidth() / 2,
+        image:getHeight()
+    )
+end
 function playSound(sound)
     love.audio.newSource(sound, "static"):play()
 end
 
 function playBackgroundMusic(sound)
-    music = love.audio.newSource(sound,"static")
+    music = love.audio.newSource(sound, "static")
     music:setLooping(true)
     music:play()
 end

@@ -8,11 +8,12 @@ function drawObjects()
         drawImage(enemies[i],zombieSprites[0])    
     end 
     drawImage(tower, towerSprite)
+    drawPlayerAxe(playerAxe,playerSprites[1])
     drawImage(player,playerSprites[0])
     local frame = math.floor(towerMeter.currentFrame)
     local meter = towerMeter.currentMeter
     drawImage(towerMeter, towerMeters[meter][frame]);
-    love.graphics.arc( "fill", player.x, player.y, player.size * WEAPON_SIZE_FACTOR  ,view_arc_angle,view_arc_angle + math.pi/6 )
+    -- love.graphics.arc( "fill", player.x, player.y, player.size * WEAPON_SIZE_FACTOR  ,view_arc_angle,view_arc_angle + math.pi/6 )
     -- rgba(72, 57, 79, 0.75)
     love.graphics.setColor( 23/255, 23/255, 23/255, 0.75 )
     love.graphics.rectangle("fill", 95, 5, 110, 70)

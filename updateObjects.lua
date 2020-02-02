@@ -5,7 +5,7 @@ bloodSplashIndex = 1
 function updateObjects(dt)
     updateTower(dt)
     view_arc_angle = view_arc_angle + WEAPON_SWING_SPEED * dt
-
+    playerAxe.Yangle = view_arc_angle
     updateObject(tower, dt)
     -- zombie tower collision
     for i = 1, ENEMY_COUNT do
@@ -53,6 +53,7 @@ function updateObjects(dt)
 
     -- bounding player to screen
     boundPlayerToScreen(player)
+    playerAxe.x, playerAxe.y = player.x, player.y
 end
 
 function removeEnemy(enemy, bloodSplash, index)
@@ -80,6 +81,8 @@ function love.mousepressed(x, y, button)
         local length = distance(player.x, player.y, x, y)
         player.vx = PLAYER_MAX_VELOCITY * (x - player.x) / length
         player.vy = PLAYER_MAX_VELOCITY * (y - player.y) / length
+        playerAxe.vx = player.vx
+        playerAxe.vy = player.vy
         player.destX, player.destY = x, y
     end
 end
