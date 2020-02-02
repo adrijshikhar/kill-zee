@@ -2,6 +2,8 @@ require "gameObject"
 require "config"
 
 function init()
+    font_header = love.graphics.newFont("res/fonts/SigmarOne-Regular.ttf", 25)
+    font_score = love.graphics.newFont("res/fonts/PressStart2P-Regular.ttf", 20)
     initPlayer()
     initTower()
     initEnemies()

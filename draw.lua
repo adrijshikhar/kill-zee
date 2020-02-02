@@ -15,8 +15,6 @@ function drawObjects()
     love.graphics.rectangle("fill", 95, 5, 110, 70)
     love.graphics.rectangle("fill", 595, 5, 130, 70)
 
-    font_header = love.graphics.newFont("res/fonts/SigmarOne-Regular.ttf", 25)
-    font_score = love.graphics.newFont("res/fonts/PressStart2P-Regular.ttf", 20)
     love.graphics.setFont(font_header)
     love.graphics.setColor(1,1,1)
     
