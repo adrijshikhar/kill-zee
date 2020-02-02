@@ -18,7 +18,7 @@ function updateObjects(dt)
         if(distance(enemies[i].x, enemies[i].y, player.x, player.y) < WEAPON_SIZE_FACTOR *player.size) then
             removeEnemy(enemies[i]);
             score = score + 1
-            TOWER_DAMAGE_SPEED = TOWER_DAMAGE_SPEED + 0.1
+            TOWER_DAMAGE_SPEED = TOWER_DAMAGE_SPEED + DAMAGE_INCREASE_RATE
         end
     end
 
