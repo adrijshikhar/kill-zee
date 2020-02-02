@@ -7,6 +7,7 @@ function init()
     initPlayer()
     initTower()
     initEnemies()
+    initBloodSplashes()
     view_arc_angle = 0
     score  = 0
     gameOver = 0
@@ -20,8 +21,8 @@ end
 function initTower()
     tower = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 50, 100)
     towerMeter = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 15, 100)
-    towerMeter.currentFrame = 0;
-    towerMeter.currentMeter = 0;
+    towerMeter.currentFrame = 0
+    towerMeter.currentMeter = 0
 end
 
 function initEnemies()
@@ -39,4 +40,19 @@ function initEnemy(enemy)
     length = distance(tower.x, tower.y, enemy.x, enemy.y)
     enemy.vx = ENEMY_MAX_VELOCITY * (tower.x - enemy.x) / length
     enemy.vy = ENEMY_MAX_VELOCITY * (tower.y - enemy.y) / length
+end
+
+function initBloodSplashes()
+    bloodSplashes = {}
+    for i = 1, ENEMY_COUNT do
+        bloodSplashes[i] = getGameObject(0, 0, 0, 0, ENEMY_SIZE*2, 100)
+        initBloodSplash(bloodSplashes[i], tower.x, tower.y)
+    end
+end
+
+function initBloodSplash(bloodSplash, x, y)
+    bloodSplash.x = x
+    bloodSplash.y = y
+    bloodSplash.vx, bloodSplash.vy = 0, 0
+    bloodSplash.timeOut = BLOOD_SPLASH_TIMEOUT
 end
