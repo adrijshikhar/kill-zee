@@ -72,6 +72,7 @@ function love.mousepressed(x, y, button)
         local length = distance(player.x, player.y, x, y)
         player.vx = PLAYER_MAX_VELOCITY * (x - player.x) / length
         player.vy = PLAYER_MAX_VELOCITY * (y - player.y) / length
+        player.destX, player.destY = x,y
     end
 end
 

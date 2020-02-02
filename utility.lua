@@ -3,8 +3,17 @@ function drawCircle(circle)
 end
 
 function updateObject(object, dt)
-    object.x = object.x + object.vx * dt
-    object.y = object.y + object.vy * dt
+    if (object=="player") 
+    then
+        local length = distance(object.x, object.y, object.DestX, object.destY)
+        while(length > 0) do
+        object.x = object.x + object.vx * dt
+        object.y = object.y + object.vy * dt
+        end
+    else
+        object.x = object.x + object.vx * dt
+        object.y = object.y + object.vy * dt
+    end
 end
 
 function distance(x1, y1, x2, y2)
