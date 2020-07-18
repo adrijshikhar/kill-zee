@@ -22,8 +22,8 @@ function initPlayer()
 end
 
 function initTower()
-    tower = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 50, 100)
-    towerMeter = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, 15, 100)
+    tower = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, TOWER_SIZE, 100)
+    towerMeter = getGameObject(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 0, 0, TOWER_METER_SIZE, 100)
     towerMeter.currentFrame = 0
     towerMeter.currentMeter = 0
 end

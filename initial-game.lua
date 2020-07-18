@@ -2,7 +2,6 @@ require "utility"
 
 function loadInitialGame()
 
-
     love.graphics.setColor(0.20784, 0.1411764, 0.2392156)
     love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getWidth())
     love.graphics.setColor(0.937255, 0.745, 0.1919)

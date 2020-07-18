@@ -1,12 +1,12 @@
 
 function drawObjects()
 
-    for i = 1, BLOOD_SPLASH_COUNT do 
-        drawImage(bloodSplashes[i],bloodSplash)    
+    for i = 1, BLOOD_SPLASH_COUNT do
+        drawImage(bloodSplashes[i],bloodSplash)
     end
-    for i = 1, ENEMY_COUNT do 
-        drawImage(enemies[i],zombieSprites[0])    
-    end 
+    for i = 1, ENEMY_COUNT do
+        drawImage(enemies[i],zombieSprites[0])
+    end
     drawImage(tower, towerSprite)
     drawPlayerAxe(playerAxe,playerSprites[1])
     drawImage(player,playerSprites[0])
