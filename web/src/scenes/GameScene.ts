@@ -12,6 +12,7 @@ import { edgeSpawnPosition } from '../systems/WaveSpawner'
 import { Player } from '../entities/Player'
 import { Axe } from '../entities/Axe'
 import { Zombie } from '../entities/Zombie'
+import { Hud } from '../ui/Hud'
 
 export class GameScene extends Phaser.Scene {
   private state!: RunState
@@ -19,6 +20,7 @@ export class GameScene extends Phaser.Scene {
   private axe!: Axe
   private tower!: Phaser.Physics.Arcade.Image
   private zombies!: Phaser.Physics.Arcade.Group
+  private hud!: Hud
   private spawnsLeft = 0
   private frenzyUntil = 0
   private freezeUntil = 0
@@ -37,6 +39,7 @@ export class GameScene extends Phaser.Scene {
     this.player = new Player(this)
     this.axe = new Axe(this)
     this.zombies = this.physics.add.group({ classType: Zombie, maxSize: 200 })
+    this.hud = new Hud(this)
 
     this.physics.add.overlap(this.axe, this.zombies, (_axe, z) => this.hitZombie(z as Zombie))
 
@@ -111,6 +114,8 @@ export class GameScene extends Phaser.Scene {
         towerMaxHp(this.state),
       )
     }
+
+    this.hud.update(this.state)
 
     // Two loss conditions: tower or player
     if (this.state.towerHp <= 0 || this.state.playerHp <= 0) {
