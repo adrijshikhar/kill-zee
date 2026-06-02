@@ -24,6 +24,20 @@ export class BootScene extends Phaser.Scene {
     super('boot')
   }
 
+  preload() {
+    this.load.setPath('assets')
+    for (const spec of PLACEHOLDERS) {
+      this.load.image(spec.key, `${spec.key}.png`)
+    }
+    for (const key of ['hit', 'pickup', 'warning', 'music']) {
+      this.load.audio(key, `audio/${key}.ogg`)
+    }
+    // Missing files just warn; create() generates placeholder textures for them.
+    this.load.on('loaderror', (file: Phaser.Loader.File) => {
+      console.warn(`asset missing, using placeholder: ${file.key}`)
+    })
+  }
+
   create() {
     // Generate a placeholder texture for any key not loaded from disk.
     for (const spec of PLACEHOLDERS) {

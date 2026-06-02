@@ -86,8 +86,9 @@ export class GameScene extends Phaser.Scene {
     if (!z) return // pool exhausted; don't count as spawned
     this.spawnsLeft--
     z.spawn(x, y, zombieHp(this.state.wave), zombieSpeed(this.state.wave))
+    const targetScale = z.scaleX // set by setDisplaySize in spawn()
     z.setScale(0)
-    this.tweens.add({ targets: z, scale: 1, duration: 200, ease: 'Back.Out' })
+    this.tweens.add({ targets: z, scale: targetScale, duration: 200, ease: 'Back.Out' })
   }
 
   private hitZombie(z: Zombie) {

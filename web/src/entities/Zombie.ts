@@ -14,6 +14,7 @@ export class Zombie extends Phaser.Physics.Arcade.Sprite {
   spawn(x: number, y: number, hp: number, speed: number) {
     this.enableBody(true, x, y, true, true)
     this.setCircle(BALANCE.zombie.radius)
+    this.setDisplaySize(BALANCE.zombie.radius * 2.4, BALANCE.zombie.radius * 2.4)
     this.hp = hp
     this.speed = speed
     this.latched = false

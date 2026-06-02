@@ -14,6 +14,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     scene.add.existing(this)
     scene.physics.add.existing(this)
     this.setCircle(BALANCE.player.radius)
+    this.setDisplaySize(BALANCE.player.radius * 2.4, BALANCE.player.radius * 2.4)
     this.setCollideWorldBounds(true)
     this.keys = scene.input.keyboard!.addKeys('W,A,S,D') as Keys
     this.cursors = scene.input.keyboard!.createCursorKeys()
