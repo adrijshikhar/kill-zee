@@ -28,6 +28,7 @@ export class GameScene extends Phaser.Scene {
   private waveTransitioning = false
   private pickups!: Phaser.Physics.Arcade.Group
   private lastHurtFxAt = 0
+  private warningSound?: Phaser.Sound.BaseSound
 
   constructor() {
     super('game')
@@ -114,6 +115,8 @@ export class GameScene extends Phaser.Scene {
     this.physics.world.pause()
     this.time.delayedCall(40, () => this.physics.world.resume())
 
+    this.playSfx('hit', Phaser.Math.FloatBetween(0.9, 1.1))
+
     this.state.score += 1
     this.state.kills += 1
     if (this.state.stats.lifesteal > 0) {
@@ -142,6 +145,7 @@ export class GameScene extends Phaser.Scene {
     const type = p.getData('type') as PickupType
     this.tweens.killTweensOf(p)
     p.destroy()
+    this.playSfx('pickup')
     if (type === 'heart') {
       this.state.towerHp = Math.min(this.state.towerHp + BALANCE.pickup.heartTowerHeal, towerMaxHp(this.state))
     } else if (type === 'bandage') {
@@ -197,8 +201,18 @@ export class GameScene extends Phaser.Scene {
 
     this.hud.update(this.state)
 
+    // Low-tower warning sound
+    const lowTower = this.state.towerHp < 0.25 * towerMaxHp(this.state)
+    if (lowTower && this.cache.audio.exists('warning')) {
+      this.warningSound ??= this.sound.add('warning', { loop: true, volume: 0.5 })
+      if (!this.warningSound.isPlaying) this.warningSound.play()
+    } else if (this.warningSound?.isPlaying) {
+      this.warningSound.stop()
+    }
+
     // Two loss conditions: tower or player
     if (this.state.towerHp <= 0 || this.state.playerHp <= 0) {
+      this.warningSound?.stop()
       this.scene.start('game-over', { score: this.state.score })
       return
     }
@@ -208,5 +222,9 @@ export class GameScene extends Phaser.Scene {
       this.scene.pause()
       this.scene.launch('upgrade', { state: this.state })
     }
+  }
+
+  private playSfx(key: string, rate = 1) {
+    if (this.cache.audio.exists(key)) this.sound.play(key, { rate })
   }
 }

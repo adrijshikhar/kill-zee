@@ -23,7 +23,10 @@ export class MenuScene extends Phaser.Scene {
     play.on('pointerover', () => play.setScale(1.1))
     play.on('pointerout', () => play.setScale(1))
     play.on('pointerdown', () => {
-      // First user gesture — web audio unlocks here (Task 16 starts music on this event).
+      // First user gesture — web audio unlocks here.
+      if (this.cache.audio.exists('music') && !this.sound.get('music')) {
+        this.sound.play('music', { loop: true, volume: 0.4 })
+      }
       this.scene.start('game')
     })
   }
