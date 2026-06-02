@@ -13,6 +13,7 @@ import { Player } from '../entities/Player'
 import { Axe } from '../entities/Axe'
 import { Zombie } from '../entities/Zombie'
 import { Hud } from '../ui/Hud'
+import { dropChance, rollDrop, type PickupType } from '../systems/Pickups'
 
 export class GameScene extends Phaser.Scene {
   private state!: RunState
@@ -25,6 +26,7 @@ export class GameScene extends Phaser.Scene {
   private frenzyUntil = 0
   private freezeUntil = 0
   private waveTransitioning = false
+  private pickups!: Phaser.Physics.Arcade.Group
 
   constructor() {
     super('game')
@@ -41,6 +43,10 @@ export class GameScene extends Phaser.Scene {
     this.axe = new Axe(this)
     this.zombies = this.physics.add.group({ classType: Zombie, maxSize: 200 })
     this.hud = new Hud(this)
+    this.pickups = this.physics.add.group()
+    this.physics.add.overlap(this.pickups, this.player, (p) =>
+      this.collectPickup(p as Phaser.Physics.Arcade.Image),
+    )
 
     this.physics.add.overlap(this.axe, this.zombies, (_axe, z) => this.hitZombie(z as Zombie))
 
@@ -83,8 +89,33 @@ export class GameScene extends Phaser.Scene {
     if (this.state.stats.lifesteal > 0) {
       this.state.playerHp = Math.min(this.state.playerHp + this.state.stats.lifesteal, playerMaxHp(this.state))
     }
+    const drop = rollDrop(Math.random, dropChance(this.state))
+    if (drop) this.spawnPickup(drop, z.x, z.y)
     this.zombies.killAndHide(z)
     ;(z.body as Phaser.Physics.Arcade.Body).enable = false
+  }
+
+  private spawnPickup(type: PickupType, x: number, y: number) {
+    const p = this.pickups.create(x, y, `pickup-${type}`) as Phaser.Physics.Arcade.Image
+    p.setData('type', type)
+    this.tweens.add({ targets: p, y: p.y - 6, duration: 500, yoyo: true, repeat: -1, ease: 'Sine.InOut' })
+    this.time.delayedCall(BALANCE.pickup.despawnMs, () => {
+      if (p.active) p.destroy()
+    })
+  }
+
+  private collectPickup(p: Phaser.Physics.Arcade.Image) {
+    const type = p.getData('type') as PickupType
+    p.destroy()
+    if (type === 'heart') {
+      this.state.towerHp = Math.min(this.state.towerHp + BALANCE.pickup.heartTowerHeal, towerMaxHp(this.state))
+    } else if (type === 'bandage') {
+      this.state.playerHp = Math.min(this.state.playerHp + BALANCE.pickup.bandagePlayerHeal, playerMaxHp(this.state))
+    } else if (type === 'frenzy') {
+      this.frenzyUntil = this.time.now + BALANCE.pickup.frenzyMs
+    } else if (type === 'freeze') {
+      this.freezeUntil = this.time.now + BALANCE.pickup.freezeMs
+    }
   }
 
   update(time: number, delta: number) {
