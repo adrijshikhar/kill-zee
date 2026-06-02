@@ -38,8 +38,14 @@ export class UpgradeScene extends Phaser.Scene {
         })
         .setOrigin(0.5)
 
-      bg.on('pointerover', () => this.tweens.add({ targets: [bg, name, desc], scale: 1.05, duration: 100 }))
-      bg.on('pointerout', () => this.tweens.add({ targets: [bg, name, desc], scale: 1, duration: 100 }))
+      bg.on('pointerover', () => {
+        this.tweens.killTweensOf([bg, name, desc])
+        this.tweens.add({ targets: [bg, name, desc], scale: 1.05, duration: 100 })
+      })
+      bg.on('pointerout', () => {
+        this.tweens.killTweensOf([bg, name, desc])
+        this.tweens.add({ targets: [bg, name, desc], scale: 1, duration: 100 })
+      })
       bg.on('pointerdown', () => {
         card.apply(data.state)
         this.scene.stop()
