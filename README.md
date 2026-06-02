@@ -2,7 +2,7 @@
 
 Defend your tower from zombies with a spinning axe. Survive waves, pick upgrades, chase your best score.
 
-**Play:** https://adrijshikhar.github.io/kill-zee/
+**Play:** https://adrijshikhar.dev/kill-zee/
 
 Built with Phaser 3 + TypeScript + Vite. Art and sounds from [Kenney](https://kenney.nl) (CC0).
 
