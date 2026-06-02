@@ -24,6 +24,7 @@ export class GameScene extends Phaser.Scene {
   private spawnsLeft = 0
   private frenzyUntil = 0
   private freezeUntil = 0
+  private waveTransitioning = false
 
   constructor() {
     super('game')
@@ -43,10 +44,14 @@ export class GameScene extends Phaser.Scene {
 
     this.physics.add.overlap(this.axe, this.zombies, (_axe, z) => this.hitZombie(z as Zombie))
 
+    this.events.off(Phaser.Scenes.Events.RESUME)
+    this.events.on(Phaser.Scenes.Events.RESUME, () => this.startWave(this.state.wave + 1))
+
     this.startWave(1)
   }
 
   private startWave(n: number) {
+    this.waveTransitioning = false
     this.state.wave = n
     this.spawnsLeft = waveZombieCount(n)
     this.time.addEvent({
@@ -121,6 +126,12 @@ export class GameScene extends Phaser.Scene {
     if (this.state.towerHp <= 0 || this.state.playerHp <= 0) {
       this.scene.start('game-over', { score: this.state.score })
       return
+    }
+
+    if (!this.waveTransitioning && this.spawnsLeft <= 0 && this.zombies.countActive() === 0) {
+      this.waveTransitioning = true
+      this.scene.pause()
+      this.scene.launch('upgrade', { state: this.state })
     }
   }
 }
