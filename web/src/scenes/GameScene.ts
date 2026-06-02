@@ -5,8 +5,9 @@ import {
   waveZombieCount,
   zombieHp,
   zombieSpeed,
+  zombieTowerDps,
 } from '../config/balance'
-import { createRunState, playerMaxHp, type RunState } from '../state/RunState'
+import { createRunState, playerMaxHp, towerMaxHp, type RunState } from '../state/RunState'
 import { edgeSpawnPosition } from '../systems/WaveSpawner'
 import { Player } from '../entities/Player'
 import { Axe } from '../entities/Axe'
@@ -86,8 +87,34 @@ export class GameScene extends Phaser.Scene {
     this.player.update(this.state)
     this.axe.update(dt, this.player, this.state, frenzy ? BALANCE.pickup.frenzySpinMult : 1)
 
+    // Zombies: move, latch, drain tower
+    let latched = 0
+    const dps = zombieTowerDps(this.state.kills)
     for (const z of this.zombies.getMatching('active', true) as Zombie[]) {
       z.update(frozen, this.tower.x, this.tower.y)
+      if (z.latched) {
+        latched++
+        if (!frozen) this.state.towerHp -= dps * dt
+      }
+    }
+
+    // Player contact damage
+    if (!frozen && this.physics.overlap(this.player, this.zombies)) {
+      this.state.playerHp -= BALANCE.player.contactDps * dt
+    }
+
+    // Repair when touching tower (penalized while swarmed)
+    if (this.physics.overlap(this.player, this.tower)) {
+      const penalty = latched >= BALANCE.tower.latchPenaltyAt ? BALANCE.tower.repairPenaltyMult : 1
+      this.state.towerHp = Math.min(
+        this.state.towerHp + BALANCE.tower.repairRate * this.state.stats.repairRateMult * penalty * dt,
+        towerMaxHp(this.state),
+      )
+    }
+
+    // Two loss conditions: tower or player
+    if (this.state.towerHp <= 0 || this.state.playerHp <= 0) {
+      this.scene.start('game-over', { score: this.state.score })
     }
   }
 }
