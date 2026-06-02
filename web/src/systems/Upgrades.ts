@@ -76,7 +76,10 @@ export const UPGRADE_CARDS: UpgradeCard[] = [
   },
 ]
 
-/** Sample `count` distinct cards using the provided rng (0..1). */
+/**
+ * Sample `count` distinct cards using the provided rng (0..1).
+ * Returns fewer than `count` cards if the pool is smaller.
+ */
 export function drawCards(rng: () => number, count = 3): UpgradeCard[] {
   const pool = [...UPGRADE_CARDS]
   const out: UpgradeCard[] = []
