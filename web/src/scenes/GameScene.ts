@@ -67,6 +67,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   private startWave(n: number) {
+    // Hit-pause resume timer may have been suspended by scene.pause() during wave transition.
+    if (this.physics.world.isPaused) this.physics.world.resume()
     this.waveTransitioning = false
     this.state.wave = n
     this.showBanner(`WAVE ${n}`)
@@ -118,6 +120,7 @@ export class GameScene extends Phaser.Scene {
     }
     const drop = rollDrop(Math.random, dropChance(this.state))
     if (drop) this.spawnPickup(drop, z.x, z.y)
+    this.tweens.killTweensOf(z)
     this.zombies.killAndHide(z)
     ;(z.body as Phaser.Physics.Arcade.Body).enable = false
   }
