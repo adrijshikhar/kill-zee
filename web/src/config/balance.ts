@@ -34,22 +34,27 @@ export const BALANCE = {
   },
 } as const
 
+/** @param wave 1-indexed wave number */
 export function waveZombieCount(wave: number): number {
   return BALANCE.wave.baseCount + wave * BALANCE.wave.countPerWave
 }
 
+/** @param wave 1-indexed wave number */
 export function waveSpawnDuration(wave: number): number {
   return BALANCE.wave.baseDuration + wave * BALANCE.wave.durationPerWave
 }
 
+/** @param wave 1-indexed wave number */
 export function spawnIntervalMs(wave: number): number {
   return (waveSpawnDuration(wave) / waveZombieCount(wave)) * 1000
 }
 
+/** @param wave 1-indexed wave number */
 export function zombieSpeed(wave: number): number {
   return BALANCE.zombie.baseSpeed * (1 + BALANCE.wave.speedPerWave * (wave - 1))
 }
 
+/** @param wave 1-indexed wave number */
 export function zombieHp(wave: number): number {
   return 1 + Math.floor((wave - 1) / BALANCE.wave.hpWaveDivisor)
 }
