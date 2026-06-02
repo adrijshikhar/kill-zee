@@ -36,6 +36,7 @@ export class GameScene extends Phaser.Scene {
 
   create() {
     this.state = createRunState()
+    this.warningSound = undefined // re-add fresh each run
     const { width, height } = this.scale
 
     this.tower = this.physics.add.image(width / 2, height / 2, 'tower-tex').setImmovable(true)
