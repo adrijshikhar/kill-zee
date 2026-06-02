@@ -54,10 +54,10 @@ export class GameScene extends Phaser.Scene {
   }
 
   private spawnZombie() {
-    this.spawnsLeft--
     const { x, y } = edgeSpawnPosition(Math.random, this.scale.width, this.scale.height)
     const z = this.zombies.get(x, y) as Zombie | null
-    if (!z) return
+    if (!z) return // pool exhausted; don't count as spawned
+    this.spawnsLeft--
     z.spawn(x, y, zombieHp(this.state.wave), zombieSpeed(this.state.wave))
   }
 
@@ -115,6 +115,7 @@ export class GameScene extends Phaser.Scene {
     // Two loss conditions: tower or player
     if (this.state.towerHp <= 0 || this.state.playerHp <= 0) {
       this.scene.start('game-over', { score: this.state.score })
+      return
     }
   }
 }
