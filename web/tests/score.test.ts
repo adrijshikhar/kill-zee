@@ -66,4 +66,17 @@ describe('saveBest', () => {
     }
     expect(saveBest(25, throwing)).toBe(25)
   })
+
+  it('ignores non-finite scores', () => {
+    const storage = fakeStorage({ 'killzee.best': '10' })
+    expect(saveBest(Number.NaN, storage)).toBe(10)
+    expect(saveBest(Number.POSITIVE_INFINITY, storage)).toBe(10)
+    expect(storage.getItem('killzee.best')).toBe('10')
+  })
+
+  it('ignores negative scores', () => {
+    const storage = fakeStorage({ 'killzee.best': '10' })
+    expect(saveBest(-3, storage)).toBe(10)
+    expect(storage.getItem('killzee.best')).toBe('10')
+  })
 })

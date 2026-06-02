@@ -23,7 +23,8 @@ export function loadBest(storage: StorageLike | null = safeStorage()): number {
 }
 
 export function saveBest(score: number, storage: StorageLike | null = safeStorage()): number {
-  const best = Math.max(score, loadBest(storage))
+  const safeScore = Number.isFinite(score) && score >= 0 ? score : 0
+  const best = Math.max(safeScore, loadBest(storage))
   if (storage) {
     try {
       storage.setItem(KEY, String(best))
