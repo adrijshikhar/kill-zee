@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { BALANCE } from '../config/balance'
 import type { RunState } from '../state/RunState'
+import { fitCircleBody } from './fitCircleBody'
 
 type Keys = Record<'W' | 'A' | 'S' | 'D', Phaser.Input.Keyboard.Key>
 
@@ -13,8 +14,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, scene.scale.width / 2, scene.scale.height / 2 + 160, 'player')
     scene.add.existing(this)
     scene.physics.add.existing(this)
-    this.setCircle(BALANCE.player.radius)
-    this.setDisplaySize(BALANCE.player.radius * 2.4, BALANCE.player.radius * 2.4)
+    fitCircleBody(this, BALANCE.player.radius * 2.4, BALANCE.player.radius)
     this.setCollideWorldBounds(true)
     this.keys = scene.input.keyboard!.addKeys('W,A,S,D') as Keys
     this.cursors = scene.input.keyboard!.createCursorKeys()

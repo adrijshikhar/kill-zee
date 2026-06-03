@@ -12,6 +12,7 @@ import { edgeSpawnPosition } from '../systems/WaveSpawner'
 import { Player } from '../entities/Player'
 import { Axe } from '../entities/Axe'
 import { Zombie } from '../entities/Zombie'
+import { fitCircleBody } from '../entities/fitCircleBody'
 import { Hud } from '../ui/Hud'
 import { dropChance, rollDrop, type PickupType } from '../systems/Pickups'
 
@@ -40,7 +41,7 @@ export class GameScene extends Phaser.Scene {
     const { width, height } = this.scale
 
     this.tower = this.physics.add.image(width / 2, height / 2, 'tower-tex').setImmovable(true)
-    this.tower.setCircle(BALANCE.tower.radius)
+    fitCircleBody(this.tower, BALANCE.tower.radius * 2, BALANCE.tower.radius)
 
     this.player = new Player(this)
     this.axe = new Axe(this)
@@ -88,7 +89,7 @@ export class GameScene extends Phaser.Scene {
     if (!z) return // pool exhausted; don't count as spawned
     this.spawnsLeft--
     z.spawn(x, y, zombieHp(this.state.wave), zombieSpeed(this.state.wave))
-    const targetScale = z.scaleX // set by setDisplaySize in spawn()
+    const targetScale = z.scaleX // set by fitCircleBody in spawn()
     z.setScale(0)
     this.tweens.add({ targets: z, scale: targetScale, duration: 200, ease: 'Back.Out' })
   }

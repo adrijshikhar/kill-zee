@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import { BALANCE } from '../config/balance'
+import { fitCircleBody } from './fitCircleBody'
 
 export class Zombie extends Phaser.Physics.Arcade.Sprite {
   hp = 1
@@ -13,9 +14,7 @@ export class Zombie extends Phaser.Physics.Arcade.Sprite {
 
   spawn(x: number, y: number, hp: number, speed: number) {
     this.enableBody(true, x, y, true, true)
-    this.setCircle(BALANCE.zombie.radius)
-    this.setScale(1)
-    this.setDisplaySize(BALANCE.zombie.radius * 2.4, BALANCE.zombie.radius * 2.4)
+    fitCircleBody(this, BALANCE.zombie.radius * 2.4, BALANCE.zombie.radius)
     this.hp = hp
     this.speed = speed
     this.latched = false
