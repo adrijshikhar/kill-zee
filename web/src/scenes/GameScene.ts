@@ -37,7 +37,11 @@ export class GameScene extends Phaser.Scene {
 
   create() {
     this.state = createRunState()
-    this.warningSound = undefined // re-add fresh each run
+    this.sound.removeByKey('warning') // drop prior run's instance from global SoundManager
+    this.warningSound = undefined
+    this.frenzyUntil = 0
+    this.freezeUntil = 0
+    this.lastHurtFxAt = 0
     const { width, height } = this.scale
 
     this.tower = this.physics.add.image(width / 2, height / 2, 'tower-tex').setImmovable(true)
